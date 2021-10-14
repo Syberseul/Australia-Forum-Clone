@@ -4,6 +4,7 @@ import Header from "./components/header";
 import Home from "./pages/home";
 import WhatsNew from "./pages/new";
 import GeneralTopics from "./pages/generalTopics";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/forums">
           <GeneralTopics />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
       </div>
     </BrowserRouter>

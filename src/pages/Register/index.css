@@ -1,0 +1,195 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(50, 50, 50);
+}
+
+.register {
+  margin: 0;
+  padding: 20px;
+}
+
+.register > p {
+  font-size: 1.6rem;
+}
+
+.register__faster {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.register__fasterText {
+  background-color: rgb(245, 245, 245);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%;
+  border: 1px solid rgb(200, 200, 200);
+  padding-right: 10px;
+}
+
+.register__fasterImg {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 70%;
+  justify-content: flex-start;
+  border: 1px solid rgb(200, 200, 200);
+  border-left: none;
+}
+
+.register__fasterImg > img {
+  width: 120px;
+  object-fit: contain;
+  margin: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.register__fasterImg > img:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+.register__formTop {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  border: 1px solid rgb(200, 200, 200);
+}
+
+.register__formTopLeft {
+  width: 30%;
+  padding-right: 20px;
+  border-right: 1px solid rgb(200, 200, 200);
+  background-color: rgb(245, 245, 245);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.register__formTag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.register__formTag > p {
+  margin-bottom: 0;
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
+.firstTag {
+  margin-top: 20px;
+}
+
+.secondTag {
+  margin-top: 35px;
+}
+
+.register__formTag > p:last-child {
+  line-height: 0.8rem;
+  font-size: 0.8rem;
+  color: rgb(161, 161, 161);
+}
+
+.register__formTopRight {
+  width: 70%;
+  margin: 20px;
+}
+
+.username > p {
+  font-size: 0.8rem;
+  color: rgb(161, 161, 161);
+}
+
+.password > p {
+  font-size: 0.8rem;
+}
+
+.email {
+  margin-top: 25px;
+}
+
+.register__formInput > input,
+.register__passwordInput {
+  width: 100%;
+  margin-top: 10px;
+  padding: 2px 5px;
+  height: 30px;
+  line-height: 1rem;
+  font-size: 1rem;
+  background-color: rgb(245, 245, 245);
+  border: none;
+  outline: none;
+}
+
+.passwordContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.showPasswordContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 2px 5px;
+  height: 30px;
+  background-color: rgb(245, 245, 245);
+  border-left: 1px solid rgb(200, 200, 200);
+  cursor: pointer;
+  width: 100px;
+}
+
+.showPasswordContainer > p {
+  margin: 0 5px;
+}
+
+.register__checkboxContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__checkbox > input {
+  margin: 20px 10px 20px auto;
+}
+
+.register__checkbox > label > span {
+  color: rgb(146, 3, 3);
+  cursor: pointer;
+}
+
+.register__checkbox > label > span:hover {
+  text-decoration: underline;
+}
+
+.register__formBottom {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(245, 245, 245);
+  display: flex;
+  border: 1px solid rgb(200, 200, 200);
+  border-top: none;
+}
+
+.register__formBottom > button {
+  background-color: rgb(146, 3, 3);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 10px 30px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.register__formBottom > button:hover {
+  background-color: rgb(185, 16, 16);
+  transition-duration: 0.5s;
+}

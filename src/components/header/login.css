@@ -1,3 +1,7 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .login {
   width: 100vw;
   height: calc(100vh - 195px);
@@ -43,7 +47,7 @@
   margin: 10px 0 20px;
 }
 
-.login__leftSection > button {
+.login__register {
   width: 100%;
   padding: 15px;
   border: none;
@@ -78,4 +82,83 @@
 .login__inputField {
   display: flex;
   flex-direction: column;
+}
+
+.login__inputField > label {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.login__password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__inputField > input,
+.login__password > input {
+  height: 20px;
+  padding: 10px 5px;
+  border: none;
+  outline: none;
+  background-color: rgb(230, 230, 230);
+}
+
+.login__inputField > input {
+  border-radius: 5px;
+}
+
+.login__password > input {
+  width: 95%;
+  border-radius: 5px 0 0 5px;
+}
+
+.login__ShowHidePwd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  height: 40px;
+  border-radius: 0 5px 5px 0;
+  padding: 0 10px;
+  border-left: 1px solid rgb(156, 156, 156);
+  cursor: pointer;
+}
+
+.login__ShowHidePwd > p {
+  padding-left: 10px;
+}
+
+.login__forgetPwd {
+  color: rgb(146, 3, 3);
+  cursor: pointer;
+}
+
+.login__forgetPwd:hover {
+  text-decoration: underline;
+}
+
+.login__checkbox {
+  margin: 5px 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login__checkbox > input {
+  width: 20px;
+  height: 20px;
+  outline: 3px solid rgb(156, 156, 156);
+  font-size: 2em;
+  outline-offset: -2px;
+}
+
+.login__rightSection > button {
+  color: #fff;
+  background-color: rgb(146, 3, 3);
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

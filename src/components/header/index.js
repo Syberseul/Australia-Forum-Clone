@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // CSS Files
 import "./index.css";
@@ -16,56 +17,44 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import PersonIcon from "@material-ui/icons/Person";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CloseIcon from "@material-ui/icons/Close";
+import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Header() {
   const [searchWord, setSearchWord] = useState("");
   const [showLogin, setShowLogin] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
   const searchCommunity = () => {
     console.log(searchWord);
   };
 
-  // Login Section
-  const Login = () => (
-    <div className="login">
-      <div className="login__container">
-        <div className="login__leftSection">
-          <h1>Join Our Community</h1>
-          <ul>
-            <li>Follow topics that matter to you</li>
-            <li>Connect with those who share your interests</li>
-            <li>Learn from the experts in our community</li>
-          </ul>
-          <p>Join now to ask, comment, and connect!</p>
-          <button>Join Now</button>
-        </div>
-        <div className="login__rightSection">
-          <h1>Log In</h1>
-          <CloseIcon
-            className="login__closeBtn"
-            onClick={() => setShowLogin(false)}
-          />
-          <div className="login__inputField login__username">
-            <label>Username or Email</label>
-            <input type="text" />
-          </div>
-          <div className="login__inputField login__password">
-            <label>Password</label>
-            <input type="password" />
-          </div>
-          <p>Forgot your password?</p>
-          <label>
-            <input type="checkbox" />
-            Stay logged in
-          </label>
-          <button>Log in</button>
-          <div>
-            This is the section await for Facebook / Google Authentication
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const triggerShowPassword = () => {
+    setShowPassword(!showPassword);
+    if (passwordType === "password") {
+      setPasswordType("text");
+    } else {
+      setPasswordType("password");
+    }
+  };
+
+  // LogIn but now working as SignIn
+  const logIn = async (username, password) => {
+    if (username !== "" && password !== "") {
+      axios
+        .post("http://localhost:3001/login", { username, password })
+        .then(setShowLogin(false))
+        .catch((err) => console.error(err));
+      setUserName("");
+      setPassword("");
+    } else {
+      alert("please enter valid username or password");
+    }
+  };
 
   return (
     <div className="header">
@@ -102,7 +91,77 @@ function Header() {
           <MoreVertIcon className="header__icon" />
         </div>
       </div>
-      {showLogin ? <Login /> : null}
+
+      {/* Login Section */}
+      {showLogin ? (
+        <div className="login">
+          <div className="login__container">
+            <div className="login__leftSection">
+              <h1>Join Our Community</h1>
+              <ul>
+                <li>Follow topics that matter to you</li>
+                <li>Connect with those who share your interests</li>
+                <li>Learn from the experts in our community</li>
+              </ul>
+              <p>Join now to ask, comment, and connect!</p>
+              <Link to="/register">
+                <button
+                  className="login__register"
+                  onClick={() => setShowLogin(false)}
+                >
+                  Join Now
+                </button>
+              </Link>
+            </div>
+            <div className="login__rightSection">
+              <h1>Log In</h1>
+              <CloseIcon
+                className="login__closeBtn"
+                onClick={() => setShowLogin(false)}
+              />
+              <div className="login__inputField">
+                <label>Username or Email</label>
+                <input
+                  type="text"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
+              <div className="login__inputField">
+                <label>Password</label>
+                <div className="login__password">
+                  <input
+                    type={passwordType}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div
+                    className="login__ShowHidePwd"
+                    onClick={triggerShowPassword}
+                  >
+                    {showPassword ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <RemoveRedEyeIcon />
+                    )}
+                    {showPassword ? <p>Hide</p> : <p>Show</p>}
+                  </div>
+                </div>
+              </div>
+              <p className="login__forgetPwd">Forgot your password?</p>
+              <div className="login__checkbox">
+                <input
+                  type="checkbox"
+                  onChange={(e) => setStayLoggedIn(!stayLoggedIn)}
+                />
+                <label>Stay logged in</label>
+              </div>
+              <button onClick={() => logIn(username, password)}>Log in</button>
+              <div>
+                This is the section await for Facebook / Google Authentication
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
