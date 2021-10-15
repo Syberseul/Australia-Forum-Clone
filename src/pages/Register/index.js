@@ -41,11 +41,18 @@ function Register() {
     } else {
       axios
         .post("http://localhost:3001/register", { username, email, password })
-        .then(console.log("post request"))
+        .then((res) => {
+          console.log(res.data);
+          if (res.data === "User already exists, please try again") {
+            alert("User already exists, please try again");
+          } else {
+            setUsername("");
+            setEmail("");
+            setPassword("");
+            setReadTerm(false);
+          }
+        })
         .catch((err) => console.error(err));
-      setUsername("");
-      setEmail("");
-      setPassword("");
     }
   };
 
@@ -83,6 +90,7 @@ function Register() {
               <input
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
+                value={username}
               />
               <p>
                 This is the name that will be shown with your messages. You may
@@ -92,7 +100,11 @@ function Register() {
             </div>
             {/* Email Input */}
             <div className="register__formInput email">
-              <input type="email" onChange={(e) => setEmail(e.target.value)} />
+              <input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
             </div>
             {/* Password Input */}
             <div className="register__formInput password">
@@ -100,6 +112,7 @@ function Register() {
                 <input
                   type={passwordType}
                   onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   className="register__passwordInput"
                 />
                 <div
@@ -121,6 +134,7 @@ function Register() {
                 <input
                   type="checkbox"
                   onChange={(e) => setReadTerm(!readTerm)}
+                  checked={readTerm}
                 />
                 <label>
                   I agree to the <span>terms</span> and{" "}
