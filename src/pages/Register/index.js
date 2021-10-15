@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 // css file
@@ -19,6 +20,8 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const [readTerm, setReadTerm] = useState(false);
+  const [user, setUser] = useState({});
+  const history = useHistory();
 
   const TriggerShowPassword = () => {
     setShowPassword(!showPassword);
@@ -42,7 +45,6 @@ function Register() {
       axios
         .post("http://localhost:3001/register", { username, email, password })
         .then((res) => {
-          console.log(res.data);
           if (res.data === "User already exists, please try again") {
             alert("User already exists, please try again");
           } else {
@@ -50,6 +52,8 @@ function Register() {
             setEmail("");
             setPassword("");
             setReadTerm(false);
+            setUser(res.data);
+            history.push("/");
           }
         })
         .catch((err) => console.error(err));
