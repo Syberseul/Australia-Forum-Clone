@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
+import { actionCreators } from "../../Store/user";
 
 // CSS Files
 import "./index.css";
@@ -20,15 +22,23 @@ import CloseIcon from "@material-ui/icons/Close";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
-function Header() {
+function Header({ user, userLogIn }) {
   const [searchWord, setSearchWord] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
+  const [userID, setUserID] = useState("");
+  const [userName, setUserName] = useState("");
 
+  useEffect(async () => {
+    const res = await axios.get(`http://localhost:3001/login/${userID}`);
+    setUserName(res.data.username);
+  }, [user, userID]);
+
+  // Implement later once upload and update blog is finished
   const searchCommunity = () => {
     console.log(searchWord);
   };
@@ -42,17 +52,39 @@ function Header() {
     }
   };
 
-  // LogIn but now working as SignIn
-  const logIn = async (username, password) => {
-    if (username !== "" && password !== "") {
-      axios
-        .post("http://localhost:3001/login", { username, password })
-        .then(setShowLogin(false))
-        .catch((err) => console.error(err));
-      setUserName("");
+  const loginValidation = (res) => {
+    if (res !== "User not found") {
+      userLogIn(res);
+      setUserID(res);
+      setEmail("");
       setPassword("");
     } else {
+      console.log("User not found");
+    }
+  };
+
+  // LogIn
+  const logIn = async (email, password) => {
+    if (email !== "" && password !== "") {
+      const res = await axios.post("http://localhost:3001/login", {
+        email,
+        password,
+      });
+      if (res.data !== "User not found") {
+        setShowLogin(false);
+        loginValidation(res.data);
+      } else {
+        alert("Not matched email and password is found");
+      }
+    } else {
       alert("please enter valid username or password");
+    }
+  };
+
+  // Trigger login section to show login component or user log out
+  const TriggerLogInOut = () => {
+    if (!user.userLoggedIn) {
+      setShowLogin(true);
     }
   };
 
@@ -83,10 +115,19 @@ function Header() {
           </Link>
           <div
             className="header__rightOptions__Login"
-            onClick={() => setShowLogin(true)}
+            onClick={TriggerLogInOut}
           >
-            <PersonIcon className="header__icon" />
-            <p>Login / Join</p>
+            {user.userLoggedIn ? (
+              <Link to="/account" className="header__link">
+                <PersonIcon className="header__icon" />
+                <p>{userName}</p>
+              </Link>
+            ) : (
+              <>
+                <PersonIcon className="header__icon" />
+                <p>Login / Join</p>
+              </>
+            )}
           </div>
           <MoreVertIcon className="header__icon" />
         </div>
@@ -120,11 +161,8 @@ function Header() {
                 onClick={() => setShowLogin(false)}
               />
               <div className="login__inputField">
-                <label>Username or Email</label>
-                <input
-                  type="text"
-                  onChange={(e) => setUserName(e.target.value)}
-                />
+                <label>Email</label>
+                <input type="text" onChange={(e) => setEmail(e.target.value)} />
               </div>
               <div className="login__inputField">
                 <label>Password</label>
@@ -150,11 +188,11 @@ function Header() {
               <div className="login__checkbox">
                 <input
                   type="checkbox"
-                  onChange={(e) => setStayLoggedIn(!stayLoggedIn)}
+                  onChange={() => setStayLoggedIn(!stayLoggedIn)}
                 />
                 <label>Stay logged in</label>
               </div>
-              <button onClick={() => logIn(username, password)}>Log in</button>
+              <button onClick={() => logIn(email, password)}>Log in</button>
               <div>
                 This is the section await for Facebook / Google Authentication
               </div>
@@ -166,4 +204,14 @@ function Header() {
   );
 }
 
-export default Header;
+const mapState = (state) => ({
+  user: state.account,
+});
+
+const mapDispatch = (dispatch) => ({
+  userLogIn(userID) {
+    dispatch(actionCreators.userLogin(userID));
+  },
+});
+
+export default connect(mapState, mapDispatch)(Header);

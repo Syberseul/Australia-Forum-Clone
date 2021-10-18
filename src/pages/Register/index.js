@@ -83,7 +83,7 @@ function Register() {
               <p>Email:</p>
               <p>Required</p>
             </div>
-            <div className="register__formTag">
+            <div className="register__formTag thirdTag">
               <p>Password:</p>
               <p>Required</p>
             </div>

@@ -23,6 +23,13 @@
 
 .header__link {
   color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header__link:hover {
+  color: rgb(153, 153, 153);
 }
 
 .header__link > img {

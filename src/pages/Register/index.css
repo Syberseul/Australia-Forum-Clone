@@ -10,6 +10,7 @@ body {
 
 .register > p {
   font-size: 1.6rem;
+  margin-bottom: 20px;
 }
 
 .register__faster {
@@ -83,11 +84,15 @@ body {
 }
 
 .firstTag {
-  margin-top: 20px;
+  margin-top: 35px;
 }
 
 .secondTag {
-  margin-top: 35px;
+  margin-top: 38px;
+}
+
+.thirdTag {
+  margin-top: 30px;
 }
 
 .register__formTag > p:last-child {
