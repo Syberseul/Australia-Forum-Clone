@@ -30,13 +30,6 @@ function Header({ user, userLogIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
-  const [userID, setUserID] = useState("");
-  const [userName, setUserName] = useState("");
-
-  useEffect(async () => {
-    const res = await axios.get(`http://localhost:3001/login/${userID}`);
-    setUserName(res.data.username);
-  }, []);
 
   // Implement later once upload and update blog is finished
   const searchCommunity = () => {
@@ -55,7 +48,6 @@ function Header({ user, userLogIn }) {
   const loginValidation = (res) => {
     if (res !== "User not found") {
       userLogIn(res);
-      setUserID(res);
       setEmail("");
       setPassword("");
     } else {
@@ -120,7 +112,6 @@ function Header({ user, userLogIn }) {
             {user.userLoggedIn ? (
               <Link to="/account" className="header__link">
                 <PersonIcon className="header__icon" />
-                <p>{userName}</p>
               </Link>
             ) : (
               <>

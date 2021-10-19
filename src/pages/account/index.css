@@ -163,8 +163,12 @@
   outline: none;
 }
 
+.updateNewUsername {
+  margin-bottom: 9px;
+}
+
 .updateNewEmail {
-  margin: 10px 0;
+  margin-top: 16px;
 }
 
 .updateContainer > button {

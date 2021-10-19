@@ -21,10 +21,7 @@ function AccountDetail({ user: { userID } }) {
   useEffect(async () => {
     const res = await axios.get(`http://localhost:3001/login/${userID}`);
     setUser(res.data);
-    setLocation(res.data.location);
-    setWebsite(res.data.website);
-    setFacebook(res.data.facebook);
-  }, [user, location, website, facebook]);
+  }, [user]);
 
   const toggleUsernameChange = () => {
     setChangeUsername((changeUsername) => !changeUsername);
@@ -41,13 +38,14 @@ function AccountDetail({ user: { userID } }) {
       .put(`http://localhost:3001/update/${userID}`, {
         newUsername: newUsername || user.username,
         newEmail: newEmail || user.email,
-        location,
-        website,
-        facebook,
+        location: location || user.location,
+        website: website || user.website,
+        facebook: facebook || user.facebook,
       })
       .catch((err) => console.error(err));
     setChangeUsername(false);
     setChangeEmail(false);
+    console.log(newUsername, newEmail, location, website, facebook);
   };
 
   return (
@@ -88,7 +86,9 @@ function AccountDetail({ user: { userID } }) {
               onChange={(e) => setNewEmail(e.target.value)}
               className="updateNewEmail"
             />
-            <button onClick={toggleEmailChange}>Cancel</button>
+            <button onClick={toggleEmailChange} style={{ marginTop: "10px" }}>
+              Cancel
+            </button>
           </div>
         ) : (
           <p>
@@ -100,20 +100,20 @@ function AccountDetail({ user: { userID } }) {
           placeholder="Enter a location"
           autoComplete="none"
           onChange={(e) => setLocation(e.target.value)}
-          defaultValue={location}
+          defaultValue={user.location}
         />
         <input
           type="text"
           className="websiteInput"
           autoComplete="none"
           onChange={(e) => setWebsite(e.target.value)}
-          defaultValue={website}
+          defaultValue={user.website}
         />
         <input
           type="text"
           autoComplete="none"
           onChange={(e) => setFacebook(e.target.value)}
-          defaultValue={facebook}
+          defaultValue={user.facebook}
         />
       </div>
       <div className="saveDiv">
