@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(50, 50, 50);
+}
+
+.home {
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  width: auto;
+  height: auto;
+  display: flex;
+}
+
+.home__leftSection {
+  width: 80%;
+  margin-right: 20px;
+}
+
+.home__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home__rightSection {
+  min-width: 250px;
+  max-width: 250px;
+  height: 330px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 2px rgba(100, 100, 100, 0.3);
+}
+
+.home__rightSection > h2 {
+  margin-bottom: 10px;
+}
+
+.home__rightSection > p {
+  margin-bottom: 20px;
+  color: rgb(100, 100, 100);
+  font-size: 0.9rem;
+}
+
+.postsAndMember {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.posts,
+.members {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.posts > h1,
+.members > h1 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.posts > p,
+.members > p {
+  color: rgb(100, 100, 100);
+  font-size: 0.9rem;
+}
+
+.posts {
+  border-right: 1px solid rgb(200, 200, 200);
+}
+
+.members {
+  padding-left: 20px;
+}
+
+.home__rightSection > button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px 0;
+  border: none;
+  background-color: rgb(146, 3, 3);
+  color: #fff;
+  cursor: pointer;
+}
+
+.home__rightSection > button:hover {
+  background-color: rgb(185, 16, 16);
+  transition-duration: 0.5s;
+}
+
+@media only screen and (max-width: 768px) {
+  .home__leftSection {
+    width: 100%;
+  }
+  .home__rightSection {
+    display: none;
+  }
+}

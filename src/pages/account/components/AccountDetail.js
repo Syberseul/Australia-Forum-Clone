@@ -18,10 +18,14 @@ function AccountDetail({ user: { userID } }) {
   const [website, setWebsite] = useState("");
   const [facebook, setFacebook] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
+    fetchData();
+  }, [user]);
+
+  const fetchData = async () => {
     const res = await axios.get(`http://localhost:3001/login/${userID}`);
     setUser(res.data);
-  }, [user]);
+  };
 
   const toggleUsernameChange = () => {
     setChangeUsername((changeUsername) => !changeUsername);
