@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
+// Reducer
 import { actionCreators } from "../../Store/user";
+
+// Components
+import AccountDetail from "./components/AccountDetail";
 
 // css file
 import "./index.css";
 
-// material UI
-import SaveIcon from "@material-ui/icons/Save";
-
-function Account({ user: { userID }, userLogOut }) {
-  const [user, setUser] = useState({});
-
-  useEffect(async () => {
-    const res = await axios.get(`http://localhost:3001/login/${userID}`);
-    setUser(res.data);
-  }, []);
-
+function Account({ userLogOut }) {
   return (
     <div className="account">
       <div className="account__title">
@@ -67,46 +60,12 @@ function Account({ user: { userID }, userLogOut }) {
           </Link>
         </div>
         <div className="account__mainRight">
-          <div className="account__mainRight__Left">
-            <p>Username: </p>
-            <p>Email: </p>
-            <p>Location: </p>
-            <p className="website">Website: </p>
-            <div className="account__mainRight__leftSpecial">
-              <p>Identities</p>
-            </div>
-            <p>Facebook: </p>
-          </div>
-          <div className="account__mainRight__Right">
-            <p>
-              {user.username} <span>Change</span>
-            </p>
-            <p>
-              {user.password} <span>Change</span>
-            </p>
-            <input
-              type="text"
-              placeholder="Enter a location"
-              autoComplete="none"
-            />
-            <input type="text" className="websiteInput" autoComplete="none" />
-            <input type="text" autoComplete="none" />
-          </div>
-          <div className="saveDiv">
-            <button>
-              <SaveIcon className="saveIcon" />
-              Save
-            </button>
-          </div>
+          <AccountDetail />
         </div>
       </div>
     </div>
   );
 }
-
-const mapState = (state) => ({
-  user: state.account,
-});
 
 const mapDispatch = (dispatch) => ({
   userLogOut() {
@@ -114,4 +73,4 @@ const mapDispatch = (dispatch) => ({
   },
 });
 
-export default connect(mapState, mapDispatch)(Account);
+export default connect(null, mapDispatch)(Account);

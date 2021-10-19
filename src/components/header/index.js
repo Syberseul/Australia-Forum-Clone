@@ -36,7 +36,7 @@ function Header({ user, userLogIn }) {
   useEffect(async () => {
     const res = await axios.get(`http://localhost:3001/login/${userID}`);
     setUserName(res.data.username);
-  }, [user, userID]);
+  }, []);
 
   // Implement later once upload and update blog is finished
   const searchCommunity = () => {

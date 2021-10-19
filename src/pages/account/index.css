@@ -148,6 +148,40 @@
   padding: 10px;
 }
 
+.updateContainer {
+  display: flex;
+  align-items: center;
+}
+
+.updateNewUsername,
+.updateNewEmail {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px 5px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+  outline: none;
+}
+
+.updateNewEmail {
+  margin: 10px 0;
+}
+
+.updateContainer > button {
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(146, 3, 3);
+  color: #fff;
+  cursor: pointer;
+}
+
+.updateContainer > button:hover {
+  background-color: rgb(177, 1, 1);
+  transition: 0.5s;
+}
+
 .account__mainRight__Right > p {
   margin: 9px 0;
   padding: 10px 0;
